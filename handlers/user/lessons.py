@@ -16,7 +16,6 @@ async def show_slots(message: Message):
         await message.answer("Извините, сейчас нет доступных слотов для записи.")
         return
 
-    # Формируем список списков кнопок (каждая кнопка в своей строке)
     buttons = [
         [InlineKeyboardButton(text=slot.datetime_str, callback_data=f"book_{slot.id}")]
         for slot in slots
@@ -29,7 +28,7 @@ async def show_slots(message: Message):
 @router.callback_query()
 async def process_booking(callback: CallbackQuery):
     if not callback.data or not callback.data.startswith("book_"):
-        return  # Игнорируем другие callback
+        return  
 
     slot_id = int(callback.data.split("_")[1])
     user_id = callback.from_user.id
