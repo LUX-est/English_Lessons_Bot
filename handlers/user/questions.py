@@ -15,7 +15,7 @@ async def ask_question(message: Message, state: FSMContext):
 
 @router.message(StateFilter(QuestionStates.waiting_for_question_text))
 async def save_question(message: Message, state: FSMContext):
-    # Если пользователь вдруг вводит команду, прервём ожидание
+    
     if message.text.startswith('/'):
         await state.clear()
         return
